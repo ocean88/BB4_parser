@@ -188,8 +188,6 @@ def parser(apiKey, secret, tags, difficulty):
     logger.info("Парсинг завершен")
     return all_problems  # Возвращаем список всех задач
 
-# tags = 'math'
-# difficulty = 1000
 #
 # # Функция для периодического запуска
 # def scheduled_task():

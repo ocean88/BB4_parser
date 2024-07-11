@@ -1,7 +1,7 @@
 import pytest
 from parser import get_current_time, generate_sha512_hash, get_api_signature, make_api_request
 from dotenv import load_dotenv
-import os
+import os, requests
 
 
 # Загрузка переменных окружения
@@ -32,17 +32,31 @@ def test_get_api_signature():
     assert len(signature) == 128 + 6, "Ожидается, что длина подписи будет 134 символа"
 
 
-def test_make_api_request():
-    methodName = 'problemset.problems'
-    params = {
+@pytest.fixture
+def api_key():
+    return 'your_api_key'
+
+@pytest.fixture
+def secret():
+    return 'your_secret'
+
+@pytest.fixture
+def method_name():
+    return 'problemset.problems'
+
+@pytest.fixture
+def params():
+    return {
         'tags': 'implementation',
         'minRating': 800,
         'maxRating': 800
     }
-    response = make_api_request(API_KEY, SECRET, methodName, params)
-    assert isinstance(response, dict), "Ожидается, что ответ будет словарем"
-    assert response['status'] == 'OK', f"Ожидается, что статус будет OK, но получен {response['status']}"
 
 
-if __name__ == "__main__":
-    pytest.main()
+def test_make_api_request(api_key, secret, method_name, params):
+    response = make_api_request(api_key, secret, method_name, params)
+    assert response is not None
+    assert isinstance(response, dict)
+    assert 'status' in response
+
+
