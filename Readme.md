@@ -35,6 +35,7 @@
     TELEGRAM_TOKEN=<your_telegram_token>
     apiKey=<your_codeforces_api_key>
     secret=<your_codeforces_api_secret>
+    DATABASE_URL=sqlite:///your_dbname.db
 ```
 3.  Запуск приложения:
    Запустите файл bot.py которое является точкой входа.

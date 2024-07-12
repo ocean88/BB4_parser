@@ -94,7 +94,6 @@ def difficulty_handler(message):
         bot.send_message(message.chat.id, 'Пожалуйста, введите корректное число для сложности.')
 
 
-
 def search_by_tag(message):
     tag = message.text
     problems = search_problems_by_tag(tag)  # Вызов функции из orm_query.py

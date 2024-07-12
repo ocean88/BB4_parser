@@ -22,6 +22,7 @@ secret = os.getenv("secret")
 # Создание базы данных и таблиц
 Base.metadata.create_all(engine)
 
+
 # Получить текущее Unix время
 def get_current_time():
     return int(time.time())
@@ -188,8 +189,8 @@ def parser(apiKey, secret, tags, difficulty):
     logger.info("Парсинг завершен")
     return all_problems  # Возвращаем список всех задач
 
-#
-# # Функция для периодического запуска
+
+# # Использовалось для начальной отладки
 # def scheduled_task():
 #     parser(apiKey, secret, tags, difficulty)
 #
