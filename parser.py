@@ -180,7 +180,7 @@ def parser(apiKey, secret, tags, difficulty):
 
             count += 10
             last_index = last_problem['index']
-            time.sleep(5)  # Избежать превышения лимита запросов к API
+            time.sleep(10)  # Избежать превышения лимита запросов к API
 
     except Exception as e:
         logger.error(f"Произошла ошибка: {e}")

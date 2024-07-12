@@ -1,6 +1,6 @@
 import pytest
 from unittest.mock import MagicMock, patch
-from bot import search_problems_by_tag, parser, scheduled_task, bot
+from bot import search_problems_by_tag
 
 
 @pytest.fixture

@@ -21,9 +21,6 @@ SECRET = os.getenv("secret")
 # Создание бота
 bot = telebot.TeleBot(TELEGRAM_TOKEN)
 
-# Константы для состояний разговора
-TAGS, DIFFICULTY = range(2)
-
 tags = None
 difficulty = None
 
@@ -75,13 +72,17 @@ def difficulty_handler(message):
             problems = parser(API_KEY, SECRET, tags, difficulty)  # Получаем результаты парсинга
             num_problems = len(problems)
             if problems:
+                count = 0
                 for problem in problems:
+                    if count >= 10:
+                        break
                     response = (f"Name: {problem['name']}\n"
                                 f"Rating: {problem['rating']}\n"
                                 f"Tags: {problem['tags']}\n"
                                 f"Link: {problem['link']}\n")
                     bot.send_message(message.chat.id, response)
                     time.sleep(5)
+                    count += 1
             else:
                 bot.send_message(message.chat.id, 'По указанным параметрам задачи не найдены.')
 
@@ -109,18 +110,6 @@ def search_by_tag(message):
             time.sleep(5)
 
 
-# Функция для периодического запуска
-def scheduled_task():
-    global tags, difficulty
-    parser(API_KEY, SECRET, tags, difficulty)
-    print(API_KEY, SECRET, tags, difficulty)
-
-
-# Запланировать задачу на каждые 20 секунд
-schedule.every(20).seconds.do(scheduled_task)
-
 if __name__ == '__main__':
     while True:
-        schedule.run_pending()
-        time.sleep(5)
         bot.polling(none_stop=True)
