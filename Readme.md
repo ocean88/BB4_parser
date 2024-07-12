@@ -36,6 +36,8 @@
     apiKey=<your_codeforces_api_key>
     secret=<your_codeforces_api_secret>
     DATABASE_URL=sqlite:///your_dbname.db
+    DATABSE_POSTGRES=postgres://login:pass@localhost:5432/YOUR_POSTGRES_DB_NAME
+    В случае использования БД POSTGRESQL создать базу и добавить к нему пользователя superuser и прописать в файле config.py DATABSE_POSTGRES
 ```
 3.  Запуск приложения:
    Запустите файл bot.py которое является точкой входа.
